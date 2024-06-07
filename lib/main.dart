@@ -1,10 +1,16 @@
 import 'package:deshi_mart/configs/Themes.dart';
-import 'package:deshi_mart/pages/Web/HomePage.dart';
+import 'package:deshi_mart/providers/drawerProvider.dart';
 import 'package:deshi_mart/views/AuthView.dart';
+import 'package:deshi_mart/views/HomeView.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (_) => DrawerProvider(),
+    ),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,9 +19,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Deshi Mart',
       theme: lightTheme,
-      home: AuthView(),
+      themeMode: ThemeMode.dark,
+      darkTheme: darkTheme,
+      home: const HomePageView(),
     );
   }
 }

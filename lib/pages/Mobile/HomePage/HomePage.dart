@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class WebHomePage extends StatelessWidget {
-  const WebHomePage({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [],
+      body: Center(
+        child: Text("Home Page"),
       ),
     );
   }

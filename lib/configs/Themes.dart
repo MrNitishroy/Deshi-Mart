@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 var lightTheme = ThemeData(
     brightness: Brightness.light,
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       background: backgroundColor,
       primary: primaryColor,
       onBackground: onBackgroundColor,
       primaryContainer: primaryContainerColor,
       onPrimaryContainer: onPrimaryContainerColor,
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       headlineMedium: TextStyle(
         fontFamily: "Poppins",
         fontSize: 25,
@@ -44,5 +44,43 @@ var lightTheme = ThemeData(
     ));
 
 var darkTheme = ThemeData(
-  brightness: Brightness.dark,
-);
+    brightness: Brightness.dark,
+    colorScheme: const ColorScheme.dark(
+      background: darkBgColor,
+      primary: darkPrimaryColor,
+      onBackground: darkOnBackground,
+      primaryContainer: darkSecondryColor,
+      onPrimaryContainer: darkOnPrimaryContainerColor,
+    ),
+    textTheme: const TextTheme(
+      headlineMedium: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 25,
+        fontWeight: FontWeight.w500,
+        color: darkOnBackground,
+      ),
+      headlineSmall: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: darkOnBackground,
+      ),
+      bodyMedium: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 15,
+        fontWeight: FontWeight.w500,
+        color: darkOnBackground,
+      ),
+      bodySmall: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 10,
+        fontWeight: FontWeight.w500,
+        color: darkOnBackground,
+      ),
+      labelMedium: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 10,
+        fontWeight: FontWeight.w400,
+        color: onPrimaryContainerColor,
+      ),
+    ));

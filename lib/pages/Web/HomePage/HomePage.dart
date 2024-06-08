@@ -57,7 +57,7 @@ class WebHomePage extends StatelessWidget {
                   onPress: () {
                     drawerProvider.seletedMenu(3);
                   },
-                  isSeleted: drawerProvider.selectedPageIndex == 2,
+                  isSeleted: drawerProvider.selectedPageIndex == 3,
                 ),
                 MyDrawerMenu(
                   title: "Settings",
@@ -65,7 +65,7 @@ class WebHomePage extends StatelessWidget {
                   onPress: () {
                     drawerProvider.seletedMenu(4);
                   },
-                  isSeleted: drawerProvider.selectedPageIndex == 2,
+                  isSeleted: drawerProvider.selectedPageIndex == 4,
                 ),
               ],
             );

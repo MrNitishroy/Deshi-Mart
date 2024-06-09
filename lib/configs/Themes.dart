@@ -77,7 +77,7 @@ var darkTheme = ThemeData(
       ),
       bodySmall: TextStyle(
         fontFamily: "Poppins",
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: FontWeight.w500,
         color: darkOnBackground,
       ),

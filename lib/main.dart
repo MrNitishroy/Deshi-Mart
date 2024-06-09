@@ -1,7 +1,6 @@
 import 'package:deshi_mart/configs/Themes.dart';
+import 'package:deshi_mart/pages/HomePage/HomePage.dart';
 import 'package:deshi_mart/providers/drawerProvider.dart';
-import 'package:deshi_mart/views/AuthView.dart';
-import 'package:deshi_mart/views/HomeView.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       themeMode: ThemeMode.dark,
       darkTheme: darkTheme,
-      home: const HomePageView(),
+      home: HomePage(),
     );
   }
 }

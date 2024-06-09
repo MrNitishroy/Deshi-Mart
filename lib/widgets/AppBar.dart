@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+
+import 'ResponsiveLayout.dart';
 
 class MyAppBar extends StatelessWidget {
   const MyAppBar({
@@ -8,6 +9,7 @@ class MyAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop = Responsive.isDesktop(context);
     return Container(
       height: 70,
       decoration: BoxDecoration(
@@ -15,13 +17,19 @@ class MyAppBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Spacer(),
+          SizedBox(width: 10),
+          if (!isDesktop)
+            IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                icon: Icon(Icons.menu)),
+          if (isDesktop) Spacer(),
           Expanded(
             child: TextFormField(
               decoration: InputDecoration(
                 hintText: "Search here...",
-                fillColor:
-                    Theme.of(context).colorScheme.background,
+                fillColor: Theme.of(context).colorScheme.background,
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -48,39 +56,25 @@ class MyAppBar extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(7),
             decoration: BoxDecoration(
-              color: Theme.of(context)
-                  .colorScheme
-                  .primary
-                  .withOpacity(0.2),
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundColor:
-                      Theme.of(context).colorScheme.primary,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   child: Text(
                     "N",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onBackground,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                   ),
                 ),
                 SizedBox(width: 10),
                 Text(
                   "Nitish Kumar",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onPrimaryContainer),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer),
                 )
               ],
             ),

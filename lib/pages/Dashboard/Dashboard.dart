@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
-class OurPage extends StatelessWidget {
-  final String title;
-  final Widget child;
-  const OurPage({super.key, required this.title, required this.child});
+class DashBoard extends StatelessWidget {
+  const DashBoard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Column(
+    return Column(
       children: [
         Row(
           children: [
@@ -25,8 +22,7 @@ class OurPage extends StatelessWidget {
           ],
         ),
         SizedBox(height: 30),
-        child,
       ],
-    ));
+    );
   }
 }

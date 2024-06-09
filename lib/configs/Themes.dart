@@ -49,8 +49,12 @@ var darkTheme = ThemeData(
       background: darkBgColor,
       primary: darkPrimaryColor,
       onBackground: darkOnBackground,
-      primaryContainer: darkSecondryColor,
+      primaryContainer: darkPrimaryContaainer,
       onPrimaryContainer: darkOnPrimaryContainerColor,
+    ),
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: darkPrimaryContaainer,
+      surfaceTintColor: darkPrimaryContaainer,
     ),
     textTheme: const TextTheme(
       headlineMedium: TextStyle(

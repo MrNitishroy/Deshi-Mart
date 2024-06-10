@@ -42,7 +42,7 @@ class MyAppBar extends StatelessWidget {
                 ),
               ),
             ),
-          
+          ),
           SizedBox(width: 20),
           IconButton(
             onPressed: () {},

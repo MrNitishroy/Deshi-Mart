@@ -13,19 +13,19 @@ var lightTheme = ThemeData(
     textTheme: const TextTheme(
       headlineMedium: TextStyle(
         fontFamily: "Poppins",
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: FontWeight.w500,
         color: onBackgroundColor,
       ),
       headlineSmall: TextStyle(
         fontFamily: "Poppins",
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: FontWeight.w500,
         color: onBackgroundColor,
       ),
       bodyMedium: TextStyle(
         fontFamily: "Poppins",
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: FontWeight.w500,
         color: onBackgroundColor,
       ),

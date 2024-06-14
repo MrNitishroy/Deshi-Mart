@@ -5,8 +5,8 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../const/data.dart';
 
-class Orderhistory extends StatelessWidget {
-  const Orderhistory({super.key});
+class AllProductsTable extends StatelessWidget {
+  const AllProductsTable({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,7 @@ class Orderhistory extends StatelessWidget {
                 width: 100,
                 columnName: "id",
                 label: Container(
+                  decoration: BoxDecoration(),
                   child: Center(child: Text("ID")),
                 )),
             GridColumn(
@@ -38,6 +39,7 @@ class Orderhistory extends StatelessWidget {
                 width: 150,
                 columnName: "name",
                 label: Container(
+                  decoration: BoxDecoration(),
                   child: Center(child: Text("Name")),
                 )),
             GridColumn(
@@ -45,6 +47,7 @@ class Orderhistory extends StatelessWidget {
                 width: 150,
                 columnName: "sellPrice",
                 label: Container(
+                  decoration: BoxDecoration(),
                   child: Center(child: Text("S Price")),
                 )),
             GridColumn(
@@ -52,6 +55,7 @@ class Orderhistory extends StatelessWidget {
                 width: 100,
                 columnName: "isActive",
                 label: Container(
+                  decoration: BoxDecoration(),
                   child: Center(child: Text("Active")),
                 )),
             GridColumn(
@@ -59,6 +63,7 @@ class Orderhistory extends StatelessWidget {
                 width: 100,
                 columnName: "stock",
                 label: Container(
+                  decoration: BoxDecoration(),
                   child: Center(child: Text("Stock")),
                 )),
             GridColumn(
@@ -66,6 +71,7 @@ class Orderhistory extends StatelessWidget {
                 allowSorting: false,
                 columnName: "supplier",
                 label: Container(
+                  decoration: BoxDecoration(),
                   child: Center(child: Text("Seller")),
                 )),
             GridColumn(
@@ -73,6 +79,7 @@ class Orderhistory extends StatelessWidget {
                 width: 100,
                 columnName: "unit",
                 label: Container(
+                  decoration: BoxDecoration(),
                   child: Center(child: Text("Unit")),
                 )),
             GridColumn(
@@ -81,6 +88,7 @@ class Orderhistory extends StatelessWidget {
                 width: 100,
                 columnName: "purchasePrice",
                 label: Container(
+                  decoration: BoxDecoration(),
                   child: Center(child: Text("Price")),
                 )),
             GridColumn(
@@ -89,6 +97,7 @@ class Orderhistory extends StatelessWidget {
                 width: 200,
                 columnName: "tags",
                 label: Container(
+                  decoration: BoxDecoration(),
                   child: Center(child: Text("Tags")),
                 )),
             GridColumn(
@@ -96,6 +105,7 @@ class Orderhistory extends StatelessWidget {
                 allowFiltering: false,
                 columnName: "action",
                 label: Container(
+                  decoration: BoxDecoration(),
                   child: Center(child: Text("Action")),
                 )),
           ]),

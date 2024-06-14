@@ -55,7 +55,11 @@ class DashBoard extends StatelessWidget {
             Row(
               children: [
                 PrimaryButton(
-                    name: "Add Product", icon: Icons.add, onTap: () {})
+                  name: "Add Product",
+                  icon: Icons.add,
+                  onTap: () {},
+                  color: Theme.of(context).colorScheme.primary,
+                )
               ],
             )
           ],

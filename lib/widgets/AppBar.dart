@@ -1,3 +1,4 @@
+import 'package:deshi_mart/widgets/MyIconButton.dart';
 import 'package:flutter/material.dart';
 
 import 'ResponsiveLayout.dart';
@@ -44,11 +45,15 @@ class MyAppBar extends StatelessWidget {
             ),
           ),
           SizedBox(width: 20),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.dark_mode,
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MyIconButton(
+                icon: Icons.dark_mode,
+                onTap: () {},
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
+            ],
           ),
           SizedBox(width: 20),
           InkWell(
@@ -57,7 +62,7 @@ class MyAppBar extends StatelessWidget {
               padding: EdgeInsets.all(7),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(5),
               ),
               child: Row(
                 children: [

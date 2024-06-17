@@ -1,13 +1,17 @@
 import 'package:deshi_mart/pages/Product/Widgets/ProductAmount.dart';
 import 'package:deshi_mart/pages/Product/Widgets/ProductDetails.dart';
 import 'package:deshi_mart/pages/Product/Widgets/ProductMeta.dart';
+import 'package:deshi_mart/providers/AddProductService.dart';
 import 'package:deshi_mart/widgets/MyIconButton.dart';
 import 'package:deshi_mart/widgets/PrimaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
+
+import '../../providers/ImagePicker.dart';
 
 class AddProduct extends StatelessWidget {
   const AddProduct({super.key});
@@ -15,6 +19,8 @@ class AddProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _stringTagController = StringTagController();
+
+    final addProductService = Provider.of<AddProductService>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
@@ -28,7 +34,9 @@ class AddProduct extends StatelessWidget {
                   PrimaryButton(
                       name: "Save",
                       icon: Icons.save,
-                      onTap: () {},
+                      onTap: () {
+                        addProductService.addProduct();
+                      },
                       color: Colors.green),
                   SizedBox(width: 20),
                   PrimaryButton(
@@ -89,7 +97,9 @@ class AddProduct extends StatelessWidget {
                   PrimaryButton(
                       name: "Save",
                       icon: Icons.save,
-                      onTap: () {},
+                      onTap: () {
+                        addProductService.addProduct();
+                      },
                       color: Colors.green),
                   SizedBox(width: 20),
                 ],

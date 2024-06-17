@@ -1,9 +1,16 @@
+import 'dart:io';
+import 'dart:js_interop';
+
+import 'package:deshi_mart/providers/AddProductService.dart';
+import 'package:deshi_mart/providers/ImagePicker.dart';
 import 'package:deshi_mart/widgets/HoverEffect.dart';
 import 'package:deshi_mart/widgets/MyDropDownButton.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 import '../../../const/Values.dart';
 
@@ -88,7 +95,9 @@ class ProductMeta extends StatelessWidget {
       "horsepower (hp)",
       "hertz (Hz)"
     ];
-
+    final imageProviderService = Provider.of<ImagePickerService>(context);
+    final addProductService = Provider.of<AddProductService>(context);
+    TextEditingController stockController = TextEditingController();
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -125,7 +134,10 @@ class ProductMeta extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    imageProviderService.pickImage(ImageSource.gallery);
+                    addProductService.images = imageProviderService.images;
+                  },
                   child: DottedBorder(
                       radius: Radius.circular(20),
                       color: Theme.of(context)
@@ -178,15 +190,82 @@ class ProductMeta extends StatelessWidget {
                     strokeWidth: 1,
                     dashPattern: [5, 7],
                     child: Container(
+                      padding: EdgeInsets.all(10),
                       height: 100,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'No image',
-                            style: Theme.of(context).textTheme.labelLarge,
-                          )
-                        ],
+                      child: Consumer<ImagePickerService>(
+                        builder: (context, imageProviderService, child) {
+                          return imageProviderService.images.isNotEmpty
+                              ? Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: imageProviderService.images
+                                      .map((e) =>
+                                          HoverEffect(builder: (isHover) {
+                                            return Stack(
+                                              children: [
+                                                Container(
+                                                  width: 100,
+                                                  height: 100,
+                                                  decoration: BoxDecoration(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onBackground
+                                                        .withOpacity(0.2),
+                                                  ),
+                                                  child: Image.network(
+                                                    e,
+                                                  ),
+                                                ),
+                                                isHover
+                                                    ? Positioned(
+                                                        top: 0,
+                                                        right: 0,
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            imageProviderService
+                                                                .removeImage(e);
+                                                          },
+                                                          child: Container(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    5),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          100),
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(
+                                                                      0.6),
+                                                            ),
+                                                            child: Icon(
+                                                              Icons.close,
+                                                              color: Colors.red,
+                                                              size: 10,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : Container()
+                                              ],
+                                            );
+                                          }))
+                                      .toList(),
+                                )
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'No image',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    )
+                                  ],
+                                );
+                        },
                       ),
                     )),
                 SizedBox(height: 20),
@@ -200,11 +279,18 @@ class ProductMeta extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
+                  controller: addProductService.stockController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(hintText: "Stock"),
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
                   ],
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Stock is required';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 20),
                 Row(
@@ -223,7 +309,9 @@ class ProductMeta extends StatelessWidget {
                           SizedBox(height: 10),
                           SearchDropDownButton(
                             items: unitType,
-                            selectedValue: (unit) {},
+                            selectedValue: (unit) {
+                              addProductService.selectedUnitType = unit ?? "";
+                            },
                             hintText: "Select Unit Type",
                           )
                         ],
@@ -244,7 +332,9 @@ class ProductMeta extends StatelessWidget {
                           SizedBox(height: 10),
                           SearchDropDownButton(
                             items: unit,
-                            selectedValue: (unit) {},
+                            selectedValue: (unit) {
+                              addProductService.selectedUnit = unit ?? "";
+                            },
                             hintText: "Select Unit",
                           )
                         ],

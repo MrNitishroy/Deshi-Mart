@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/AddProductService.dart';
 
 class ProductAmount extends StatelessWidget {
   const ProductAmount({
@@ -8,6 +11,7 @@ class ProductAmount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final addProductService = Provider.of<AddProductService>(context);
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -49,6 +53,7 @@ class ProductAmount extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextFormField(
+                          controller: addProductService.purchasePriceController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(hintText: "Amount"),
                           inputFormatters: <TextInputFormatter>[
@@ -71,6 +76,7 @@ class ProductAmount extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextFormField(
+                          controller: addProductService.sellPriceController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(hintText: "Amount"),
                           inputFormatters: <TextInputFormatter>[
@@ -93,6 +99,7 @@ class ProductAmount extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextFormField(
+                          controller: addProductService.discountPriceController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(hintText: "Amount"),
                           inputFormatters: <TextInputFormatter>[
@@ -107,7 +114,7 @@ class ProductAmount extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Purchase Price',
+                      'Tags',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],

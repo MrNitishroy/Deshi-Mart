@@ -1,6 +1,9 @@
 import 'package:deshi_mart/widgets/MyDropDownButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/AddProductService.dart';
 
 class ProductDetails extends StatelessWidget {
   const ProductDetails({
@@ -14,6 +17,7 @@ class ProductDetails extends StatelessWidget {
       "Clothing",
     ];
 
+    final addProductService = Provider.of<AddProductService>(context);
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -49,6 +53,7 @@ class ProductDetails extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
+                  controller: addProductService.productNameController,
                   decoration: InputDecoration(
                     hintText: 'Product name',
                   ),
@@ -64,6 +69,7 @@ class ProductDetails extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
+                  controller: addProductService.descriptionController,
                   maxLines: 5,
                   decoration: InputDecoration(
                     hintText: 'Description',
@@ -81,7 +87,9 @@ class ProductDetails extends StatelessWidget {
                 SizedBox(height: 10),
                 SearchDropDownButton(
                   items: category,
-                  selectedValue: (value) {},
+                  selectedValue: (value) {
+                    addProductService.selectedCategory = value ?? "";
+                  },
                   hintText: "Select Category",
                 ),
                 SizedBox(height: 20),
@@ -96,29 +104,12 @@ class ProductDetails extends StatelessWidget {
                 SizedBox(height: 10),
                 SearchDropDownButton(
                   items: category,
-                  selectedValue: (value) {},
+                  selectedValue: (value) {
+                    addProductService.selectedSubCategory = value ?? "";
+                  },
                   hintText: "Select Sub Category",
                 ),
                 SizedBox(height: 20),
-                // Row(
-                //   children: [
-                //     Text(
-                //       'Sub-Category',
-                //       style: Theme.of(context).textTheme.bodyMedium,
-                //     ),
-                //   ],
-                // ),
-                // SizedBox(height: 10),
-                // Row(
-                //   children: [
-                //     Text('Active'),
-                //     SizedBox(width: 10),
-                //     Transform.scale(
-                //       scale: 0.5,
-                //       child: Switch(value: true, onChanged: (value) {}),
-                //     ),
-                //   ],
-                // ),
               ],
             ),
           ),

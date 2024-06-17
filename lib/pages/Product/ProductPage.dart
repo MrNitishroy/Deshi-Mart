@@ -1,5 +1,9 @@
 import 'package:deshi_mart/const/data.dart';
+import 'package:deshi_mart/pages/Product/Widgets/ProductsTableData.dart';
+import 'package:deshi_mart/widgets/MyIconButton.dart';
+import 'package:deshi_mart/widgets/PrimaryButton.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -10,41 +14,52 @@ class ProductPage extends StatelessWidget {
       children: [
         Row(
           children: [
-            Container(
-              width: 7,
-              height: 40,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            SizedBox(width: 10),
-            Text(
-              "Product",
-              style: Theme.of(context).textTheme.bodyMedium,
+            Row(
+              children: [
+                Container(
+                  width: 5,
+                  height: 30,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                SizedBox(width: 10),
+                Text(
+                  "Dashboard",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
             ),
           ],
         ),
-        SizedBox(height: 30),
-        DataTable(
-            // columnSpacing: 20,
-            dividerThickness: 0.1,
-            showCheckboxColumn: true,
-            headingRowColor: WidgetStatePropertyAll(
-                Theme.of(context).colorScheme.primary.withOpacity(0.2)),
-            columns: [
-              DataColumn(label: Text("Id"), numeric: false),
-              DataColumn(label: Text("Name"), numeric: false),
-              DataColumn(label: Text("Price")),
-              DataColumn(label: Text("Unit")),
-              DataColumn(label: Text("Stock")),
-            ],
-            rows: products
-                .map((product) => DataRow(cells: [
-                      DataCell(Text(product.id.toString())),
-                      DataCell(Text(product.name.toString())),
-                      DataCell(Text(product.sellPrice.toString())),
-                      DataCell(Text(product.unit.toString())),
-                      DataCell(Text(product.stock.toString())),
-                    ]))
-                .toList())
+        SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            MyIconButton(
+              icon: Icons.refresh,
+              color: Colors.orange,
+              onTap: () {},
+            ),
+            SizedBox(width: 10),
+            PrimaryButton(
+              name: "Export",
+              icon: Icons.import_export_sharp,
+              onTap: () {},
+              color: Colors.deepPurple,
+            ),
+            SizedBox(width: 10),
+            PrimaryButton(
+              name: "Add New",
+              icon: Icons.add,
+              onTap: () {
+                context.push('/addProduct');
+              },
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            SizedBox(width: 10),
+          ],
+        ),
+        SizedBox(height: 20),
+        ProductsTableData(),
       ],
     );
   }

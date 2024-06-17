@@ -20,7 +20,7 @@ class ProductsTableData extends StatelessWidget {
       ),
       padding: EdgeInsets.all(10),
       child: SfDataGrid(
-          rowHeight: 150,
+          rowHeight: 100,
           source: productDataSource,
           allowFiltering: true,
           allowSorting: true,

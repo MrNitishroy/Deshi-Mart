@@ -1,3 +1,4 @@
+import 'package:deshi_mart/configs/PageRoutes.dart';
 import 'package:deshi_mart/configs/Themes.dart';
 import 'package:deshi_mart/pages/HomePage/HomePage.dart';
 import 'package:deshi_mart/providers/drawerProvider.dart';
@@ -17,13 +18,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Deshi Mart',
       theme: lightTheme,
       themeMode: ThemeMode.dark,
       darkTheme: darkTheme,
-      home: HomePage(),
+      routerConfig: router,
     );
   }
 }

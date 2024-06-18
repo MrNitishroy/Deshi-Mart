@@ -1,9 +1,11 @@
+import 'package:deshi_mart/providers/AddProductProvider.dart';
 import 'package:deshi_mart/widgets/HoverEffect.dart';
 import 'package:deshi_mart/widgets/MyDropDownButton.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 import '../../../const/Values.dart';
 
@@ -88,7 +90,7 @@ class ProductMeta extends StatelessWidget {
       "horsepower (hp)",
       "hertz (Hz)"
     ];
-
+    final addProductProvider = Provider.of<AddProductProvider>(context);
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -125,7 +127,9 @@ class ProductMeta extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    addProductProvider.pickImage();
+                  },
                   child: DottedBorder(
                       radius: Radius.circular(20),
                       color: Theme.of(context)

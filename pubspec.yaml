@@ -44,6 +44,7 @@ dependencies:
   dotted_border: ^2.1.0
   textfield_tags: ^3.0.1
   image_picker: ^1.1.2
+  firebase_core: ^3.1.0
 
 dev_dependencies:
   flutter_test:

@@ -1,12 +1,18 @@
 import 'package:deshi_mart/configs/PageRoutes.dart';
 import 'package:deshi_mart/configs/Themes.dart';
+import 'package:deshi_mart/firebase_options.dart';
 import 'package:deshi_mart/providers/DrawerProvider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/AddProductProvider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => DrawerProvider()),

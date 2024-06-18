@@ -1,6 +1,9 @@
 import 'package:deshi_mart/widgets/MyDropDownButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/AddProductProvider.dart';
 
 class ProductDetails extends StatelessWidget {
   const ProductDetails({
@@ -13,7 +16,7 @@ class ProductDetails extends StatelessWidget {
       "Electronic",
       "Clothing",
     ];
-
+    final addProductProvider = Provider.of<AddProductProvider>(context);
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -49,6 +52,7 @@ class ProductDetails extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
+                  controller: addProductProvider.name,
                   decoration: InputDecoration(
                     hintText: 'Product name',
                   ),
@@ -65,6 +69,7 @@ class ProductDetails extends StatelessWidget {
                 SizedBox(height: 10),
                 TextFormField(
                   maxLines: 5,
+                  controller: addProductProvider.description,
                   decoration: InputDecoration(
                     hintText: 'Description',
                   ),
@@ -81,7 +86,11 @@ class ProductDetails extends StatelessWidget {
                 SizedBox(height: 10),
                 SearchDropDownButton(
                   items: category,
-                  selectedValue: (value) {},
+                  selectedValue: (value) {
+                    if (value != null) {
+                      addProductProvider.selectedCategory = value;
+                    }
+                  },
                   hintText: "Select Category",
                 ),
                 SizedBox(height: 20),
@@ -96,7 +105,11 @@ class ProductDetails extends StatelessWidget {
                 SizedBox(height: 10),
                 SearchDropDownButton(
                   items: category,
-                  selectedValue: (value) {},
+                  selectedValue: (value) {
+                    if (value != null) {
+                      addProductProvider.selectedSubCategory = value;
+                    }
+                  },
                   hintText: "Select Sub Category",
                 ),
                 SizedBox(height: 20),

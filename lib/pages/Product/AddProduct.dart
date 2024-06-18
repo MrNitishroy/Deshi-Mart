@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
+
+import '../../providers/AddProductProvider.dart';
 
 class AddProduct extends StatelessWidget {
   const AddProduct({super.key});
@@ -15,6 +18,7 @@ class AddProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _stringTagController = StringTagController();
+    final addProductProvider = Provider.of<AddProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
@@ -28,7 +32,9 @@ class AddProduct extends StatelessWidget {
                   PrimaryButton(
                       name: "Save",
                       icon: Icons.save,
-                      onTap: () {},
+                      onTap: () {
+                        addProductProvider.printProductsDetails();
+                      },
                       color: Colors.green),
                   SizedBox(width: 20),
                   PrimaryButton(

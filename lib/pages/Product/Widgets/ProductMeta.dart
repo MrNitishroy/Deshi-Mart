@@ -174,25 +174,78 @@ class ProductMeta extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 DottedBorder(
-                    radius: Radius.circular(20),
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onBackground
-                        .withOpacity(0.1),
-                    strokeWidth: 1,
-                    dashPattern: [5, 7],
-                    child: Container(
-                      height: 100,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'No image',
-                            style: Theme.of(context).textTheme.labelLarge,
-                          )
-                        ],
-                      ),
-                    )),
+                  radius: Radius.circular(20),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onBackground
+                      .withOpacity(0.1),
+                  strokeWidth: 1,
+                  dashPattern: [5, 7],
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    height: 100,
+                    child: Consumer<AddProductProvider>(
+                        builder: (context, value, child) {
+                      return value.images.isEmpty
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'No image',
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                )
+                              ],
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: value.images.map((e) {
+                                return HoverEffect(builder: (isHover) {
+                                  return Stack(
+                                    children: [
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary
+                                                .withOpacity(0.2),
+                                          ),
+                                          height: 100,
+                                          width: 100,
+                                          child: Image.network(e)),
+                                      Positioned(
+                                          top: 0,
+                                          right: 0,
+                                          child: isHover
+                                              ? InkWell(
+                                                  onTap: () {
+                                                    addProductProvider
+                                                        .removeImage(e);
+                                                  },
+                                                  child: Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                      color: Colors.white
+                                                          .withOpacity(0.6),
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.close,
+                                                      color: Colors.red,
+                                                      size: 10,
+                                                    ),
+                                                  ),
+                                                )
+                                              : Container())
+                                    ],
+                                  );
+                                });
+                              }).toList(),
+                            );
+                    }),
+                  ),
+                ),
                 SizedBox(height: 20),
                 Row(
                   children: [
@@ -204,6 +257,7 @@ class ProductMeta extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
+                  controller: addProductProvider.stock,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(hintText: "Stock"),
                   inputFormatters: <TextInputFormatter>[
@@ -227,7 +281,11 @@ class ProductMeta extends StatelessWidget {
                           SizedBox(height: 10),
                           SearchDropDownButton(
                             items: unitType,
-                            selectedValue: (unit) {},
+                            selectedValue: (unitType) {
+                              if (unitType != null) {
+                                addProductProvider.selectedUnitType = unitType;
+                              }
+                            },
                             hintText: "Select Unit Type",
                           )
                         ],
@@ -248,7 +306,11 @@ class ProductMeta extends StatelessWidget {
                           SizedBox(height: 10),
                           SearchDropDownButton(
                             items: unit,
-                            selectedValue: (unit) {},
+                            selectedValue: (unit) {
+                              if (unit != null) {
+                                addProductProvider.selectedUnit = unit;
+                              }
+                            },
                             hintText: "Select Unit",
                           )
                         ],

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/AddProductProvider.dart';
 
 class ProductAmount extends StatelessWidget {
   const ProductAmount({
@@ -8,6 +11,7 @@ class ProductAmount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final addProductProvider = Provider.of<AddProductProvider>(context);
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -49,6 +53,7 @@ class ProductAmount extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextFormField(
+                          controller: addProductProvider.purchasePrice,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(hintText: "Amount"),
                           inputFormatters: <TextInputFormatter>[
@@ -71,6 +76,7 @@ class ProductAmount extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextFormField(
+                          controller: addProductProvider.sellPrice,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(hintText: "Amount"),
                           inputFormatters: <TextInputFormatter>[
@@ -93,6 +99,7 @@ class ProductAmount extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextFormField(
+                          controller: addProductProvider.discountPrice,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(hintText: "Amount"),
                           inputFormatters: <TextInputFormatter>[
@@ -114,6 +121,7 @@ class ProductAmount extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
+                  controller: addProductProvider.tags,
                   maxLines: 5,
                   decoration: InputDecoration(
                     hintText: "Enter Tags",

@@ -26,7 +26,8 @@ class ImagePickerService extends ChangeNotifier {
 
   Future<void> pickImage(ImageSource source) async {
     if (images.length < 6) {
-      final pickedFile = await imagePicker.pickImage(source: source);
+      final pickedFile =
+          await imagePicker.pickImage(source: source, imageQuality: 20);
       if (pickedFile != null) {
         // Convert the file to a data URL
         final bytes = await pickedFile.readAsBytes();

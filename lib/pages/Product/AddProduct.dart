@@ -31,13 +31,17 @@ class AddProduct extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  PrimaryButton(
-                      name: "Save",
-                      icon: Icons.save,
-                      onTap: () {
-                        addProductService.addProduct();
-                      },
-                      color: Colors.green),
+                  Consumer<AddProductService>(
+                    builder: (context, value, child) => value.isLoading
+                        ? CircularProgressIndicator()
+                        : PrimaryButton(
+                            name: "Save",
+                            icon: Icons.save,
+                            onTap: () {
+                              addProductService.addProduct();
+                            },
+                            color: Colors.green),
+                  ),
                   SizedBox(width: 20),
                   PrimaryButton(
                       name: "Close",
@@ -94,13 +98,17 @@ class AddProduct extends StatelessWidget {
                       },
                       color: Colors.red),
                   SizedBox(width: 20),
-                  PrimaryButton(
-                      name: "Save",
-                      icon: Icons.save,
-                      onTap: () {
-                        addProductService.addProduct();
-                      },
-                      color: Colors.green),
+                  Consumer<AddProductService>(
+                    builder: (context, value, child) => value.isLoading
+                        ? CircularProgressIndicator()
+                        : PrimaryButton(
+                            name: "Save",
+                            icon: Icons.save,
+                            onTap: () {
+                              addProductService.addProduct();
+                            },
+                            color: Colors.green),
+                  ),
                   SizedBox(width: 20),
                 ],
               ),

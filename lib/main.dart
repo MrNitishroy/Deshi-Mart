@@ -1,14 +1,19 @@
 import 'package:deshi_mart/configs/PageRoutes.dart';
 import 'package:deshi_mart/configs/Themes.dart';
-import 'package:deshi_mart/pages/HomePage/HomePage.dart';
+import 'package:deshi_mart/firebase_options.dart';
 import 'package:deshi_mart/providers/ImagePicker.dart';
 import 'package:deshi_mart/providers/drawerProvider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/AddProductService.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(
       providers: [

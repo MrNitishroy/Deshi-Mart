@@ -11,6 +11,7 @@ class Product {
   double? unitPrice;
   List<String>? tags;
   String? category;
+  String? subCategory;
   List<String>? images;
   String? createAt;
   String? updatedAt;
@@ -33,6 +34,7 @@ class Product {
       this.unitPrice,
       this.tags,
       this.category,
+      this.subCategory,
       this.images,
       this.createAt,
       this.updatedAt,
@@ -74,6 +76,9 @@ class Product {
     }
     if (json["category"] is String) {
       category = json["category"];
+    }
+    if (json["subCategory"] is String) {
+      subCategory = json["subCategory"];
     }
     if (json["images"] is List) {
       images = json["images"] ?? [];
@@ -121,6 +126,7 @@ class Product {
       _data["tags"] = tags;
     }
     _data["category"] = category;
+    _data["subCategory"] = subCategory;
     if (images != null) {
       _data["images"] = images;
     }

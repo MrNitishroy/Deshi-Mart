@@ -212,7 +212,7 @@ class ProductMeta extends StatelessWidget {
                                                         .onBackground
                                                         .withOpacity(0.2),
                                                   ),
-                                                  child: Image.network(
+                                                  child: Image.memory(
                                                     e,
                                                   ),
                                                 ),

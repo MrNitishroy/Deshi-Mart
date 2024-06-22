@@ -4,17 +4,17 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:html' as html;
 
 class ImagePickerService extends ChangeNotifier {
-  List<String> images = [];
+  List<Uint8List> images = [];
   final ImagePicker imagePicker = ImagePicker();
 
-  void addImage(String image) {
+  void addImage(Uint8List image) {
     if (images.length < 6) {
       images.add(image);
       notifyListeners();
     }
   }
 
-  void removeImage(String image) {
+  void removeImage(Uint8List image) {
     images.remove(image);
     notifyListeners();
   }
@@ -29,11 +29,8 @@ class ImagePickerService extends ChangeNotifier {
       final pickedFile =
           await imagePicker.pickImage(source: source, imageQuality: 20);
       if (pickedFile != null) {
-        // Convert the file to a data URL
         final bytes = await pickedFile.readAsBytes();
-        final blob = html.Blob([bytes]);
-        final url = html.Url.createObjectUrlFromBlob(blob);
-        images.add(url);
+        images.add(bytes);
         notifyListeners();
       }
     }

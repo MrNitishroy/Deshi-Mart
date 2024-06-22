@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:deshi_mart/models/Product.dart';
 import 'package:deshi_mart/providers/ImagePicker.dart';
@@ -11,7 +12,6 @@ import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
 
 class AddProductService extends ChangeNotifier {
-  // final imagePickerSerivce = Provider.of<ImagePickerService>();
   TextEditingController productNameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController sellPriceController = TextEditingController();
@@ -26,17 +26,17 @@ class AddProductService extends ChangeNotifier {
   TextEditingController stockController = TextEditingController();
   bool isActive = true;
   List<String> tags = [];
-  List<String> images = [];
+  List<Uint8List> images = [];
   bool isLoading = false;
 
   Future<void> addProduct() async {
     try {
       String id = uuid.v4();
       isLoading = true;
+      notifyListeners();
       List<String> imageUrls = await uploadImages(images, id);
-
       var product = Product(
-        id: "",
+        id: id,
         name: productNameController.text,
         description: descriptionController.text,
         sellPrice: double.parse(sellPriceController.text),
@@ -54,7 +54,6 @@ class AddProductService extends ChangeNotifier {
         updatedAt: DateTime.now().toString(),
         supplier: "Nitish kumar",
       );
-
       var response = await http.post(
         Uri.parse("https://localhost:7093/api/Product"),
         body: jsonEncode(product),
@@ -64,22 +63,27 @@ class AddProductService extends ChangeNotifier {
       notifyListeners();
     } catch (ex) {
       print(ex);
+      isLoading = false;
+      notifyListeners();
     }
   }
 
   void showProductDetails() async {}
 
-  Future<List<String>> uploadImages(List<String> path, String id) async {
+  Future<List<String>> uploadImages(
+      List<Uint8List> images, String forlderName) async {
     List<String> imageUrls = [];
-    if (path.isEmpty) {
-      return imageUrls;
-    }
-    for (var image in path) {
-      final storageRef = db.ref("images/$id/$image");
-      var uploadTask = await storageRef.putFile(File(image));
-      await uploadTask.ref.getDownloadURL().then((value) {
-        imageUrls.add(value);
-      });
+    for (var image in images) {
+      String imageId = "${uuid.v4()}.jpg";
+      var imageRef = db.ref(forlderName);
+      try {
+        await imageRef.child(imageId).putData(image);
+        String downloadUrl = await imageRef.child(imageId).getDownloadURL();
+        imageUrls.add(downloadUrl);
+        print("Image uploaded successfully: $downloadUrl");
+      } catch (e) {
+        print("Failed to upload image: $e");
+      }
     }
     return imageUrls;
   }

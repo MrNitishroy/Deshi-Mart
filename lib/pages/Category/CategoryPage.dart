@@ -45,7 +45,7 @@ class CategoryPage extends StatelessWidget {
               name: "Add New",
               icon: Icons.add,
               onTap: () {
-                context.push('/addCategory');
+                context.go('/addCategory');
               },
               color: Theme.of(context).colorScheme.primary,
             ),

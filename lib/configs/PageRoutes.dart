@@ -1,4 +1,4 @@
-import 'package:deshi_mart/pages/Catregory/AddCategory.dart';
+import 'package:deshi_mart/pages/Category/AddCategory.dart';
 import 'package:deshi_mart/pages/HomePage/HomePage.dart';
 import 'package:deshi_mart/pages/Product/AddProduct.dart';
 import 'package:flutter/material.dart';

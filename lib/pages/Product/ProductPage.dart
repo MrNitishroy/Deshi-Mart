@@ -51,7 +51,7 @@ class ProductPage extends StatelessWidget {
               name: "Add New",
               icon: Icons.add,
               onTap: () {
-                context.push('/addProduct');
+                context.go('/addProduct');
               },
               color: Theme.of(context).colorScheme.primary,
             ),

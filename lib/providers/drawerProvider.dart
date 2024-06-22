@@ -1,4 +1,4 @@
-import 'package:deshi_mart/pages/Catregory/CategoryPage.dart';
+import 'package:deshi_mart/pages/Category/CategoryPage.dart';
 import 'package:deshi_mart/pages/Coupon/CouponPage.dart';
 import 'package:deshi_mart/pages/Dashboard/Dashboard.dart';
 import 'package:deshi_mart/pages/Product/ProductPage.dart';

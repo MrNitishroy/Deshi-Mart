@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../providers/AddProductProvider.dart';
+import '../../widgets/ResponsiveLayout.dart';
 
 class AddProduct extends StatelessWidget {
   const AddProduct({super.key});
@@ -20,6 +21,7 @@ class AddProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     final _stringTagController = StringTagController();
     final addProductProvider = Provider.of<AddProductProvider>(context);
+    bool isDesktop = Responsive.isDesktop(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
@@ -64,32 +66,42 @@ class AddProduct extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+              isDesktop
+                  ? const Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              ProductDetails(),
+                            ],
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              ProductMeta(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  : const Column(
                       children: [
                         ProductDetails(),
-                      ],
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
+                        SizedBox(height: 20),
                         ProductMeta(),
                       ],
                     ),
-                  ),
-                ],
-              ),
               SizedBox(height: 20),
               ProductAmount(),
               SizedBox(height: 20),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: isDesktop
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.center,
                 children: [
                   PrimaryButton(
                       name: "Close",

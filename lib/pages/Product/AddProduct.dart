@@ -95,8 +95,8 @@ class AddProduct extends StatelessWidget {
                       name: "Close",
                       icon: Icons.close,
                       onTap: () {
-                        // context.pop();
-                        successMessage(context, "Product Added Successfully");
+                        context.pop();
+                        // successMessage(context, "Product Added Successfully");
                       },
                       color: Colors.red),
                   SizedBox(width: 20),

@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 
 import 'providers/AddProductProvider.dart';
+import 'providers/CategoryProvider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,7 @@ void main() async {
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => DrawerProvider()),
       ChangeNotifierProvider(create: (_) => AddProductProvider()),
+      ChangeNotifierProvider(create: (_) => CategoryProvider()),
     ], child: const MyApp()),
   );
 }

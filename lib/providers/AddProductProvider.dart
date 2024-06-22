@@ -6,15 +6,17 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:typed_data';
 import 'package:uuid/uuid.dart';
 
+import '../configs/CustomNotication.dart';
+
 class AddProductProvider extends ChangeNotifier {
   final ImagePicker picker = ImagePicker();
   List<Uint8List> images = [];
   TextEditingController name = TextEditingController();
   TextEditingController description = TextEditingController();
-  TextEditingController purchasePrice = TextEditingController();
+  TextEditingController purchasePrice = TextEditingController(text: "0");
   TextEditingController sellPrice = TextEditingController();
-  TextEditingController discountPrice = TextEditingController();
-  TextEditingController stock = TextEditingController();
+  TextEditingController discountPrice = TextEditingController(text: "0");
+  TextEditingController stock = TextEditingController(text: "0");
   TextEditingController tags = TextEditingController();
   final db = FirebaseStorage.instance;
   final database = FirebaseFirestore.instance;
@@ -41,10 +43,8 @@ class AddProductProvider extends ChangeNotifier {
 
   Future<void> addProduct(BuildContext context) async {
     if (!_validateInputs(context)) return;
-
     isLoading = true;
     notifyListeners();
-
     try {
       String id = uuid.v4();
       List<String> urls = await uploadImages(images, "product");
@@ -64,13 +64,10 @@ class AddProductProvider extends ChangeNotifier {
         averageRating: 0,
       );
       await database.collection("products").doc(id).set(newProduct.toJson());
-      print("Product added successfully");
+      successMessage(context, "Product added");
       clearAllField();
     } catch (e) {
-      print("Failed to add product: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to add product: $e')),
-      );
+      errorMessage(context, "Failed to add product");
     } finally {
       isLoading = false;
       notifyListeners();
@@ -135,53 +132,47 @@ class AddProductProvider extends ChangeNotifier {
 
   bool _validateInputs(BuildContext context) {
     if (name.text.isEmpty) {
-      _showError(context, "Name is required.");
+      errorMessage(context, "Name is required.");
       return false;
     }
     if (images.isEmpty) {
-      _showError(context, "At least one image is required.");
+      errorMessage(context, "At least one image is required.");
       return false;
     }
     if (sellPrice.text.isEmpty || double.tryParse(sellPrice.text) == null) {
-      _showError(context, "Valid sell price is required.");
+      errorMessage(context, "Valid sell price is required.");
       return false;
     }
     if (purchasePrice.text.isEmpty ||
         double.tryParse(purchasePrice.text) == null) {
-      _showError(context, "Valid purchase price is required.");
+      errorMessage(context, "Valid purchase price is required.");
       return false;
     }
-    if (selectedCategory == null) {
-      _showError(context, "Category is required.");
+    if (selectedCategory == "") {
+      errorMessage(context, "Category is required.");
       return false;
     }
-    if (selectedSubCategory == null) {
-      _showError(context, "Sub-category is required.");
+    if (selectedSubCategory == "") {
+      errorMessage(context, "Sub-category is required.");
       return false;
     }
-    if (selectedUnitType == null) {
-      _showError(context, "Unit type is required.");
+    if (selectedUnitType == "") {
+      errorMessage(context, "Unit type is required.");
       return false;
     }
-    if (selectedUnit == null) {
-      _showError(context, "Unit is required.");
+    if (selectedUnit == "") {
+      errorMessage(context, "Unit is required.");
       return false;
     }
     if (discountPrice.text.isEmpty ||
         double.tryParse(discountPrice.text) == null) {
-      _showError(context, "Valid discount price is required.");
+      errorMessage(context, "Valid discount price is required.");
       return false;
     }
     if (stock.text.isEmpty || double.tryParse(stock.text) == null) {
-      _showError(context, "Valid stock is required.");
+      errorMessage(context, "Valid stock is required.");
       return false;
     }
     return true;
-  }
-
-  void _showError(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
   }
 }

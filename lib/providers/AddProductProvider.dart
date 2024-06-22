@@ -39,35 +39,42 @@ class AddProductProvider extends ChangeNotifier {
     print("Images : $images");
   }
 
-  Future<void> addProduct() async {
+  Future<void> addProduct(BuildContext context) async {
+    if (!_validateInputs(context)) return;
+
     isLoading = true;
     notifyListeners();
-    String id = uuid.v4();
-    List<String> urls = await uploadImages(images, "product");
-    Product newProduct = Product(
-      id: id,
-      name: name.text,
-      description: description.text,
-      sellPrice: double.parse(sellPrice.text),
-      purchasePrice: double.parse(purchasePrice.text),
-      images: urls,
-      category: selectedCategory,
-      subCategory: selectedSubCategory,
-      unitType: selectedUnitType,
-      unit: selectedUnit,
-      discount: double.parse(discountPrice.text),
-      stock: double.parse(stock.text),
-      averageRating: 0,
-    );
+
     try {
+      String id = uuid.v4();
+      List<String> urls = await uploadImages(images, "product");
+      Product newProduct = Product(
+        id: id,
+        name: name.text,
+        description: description.text,
+        sellPrice: double.parse(sellPrice.text),
+        purchasePrice: double.parse(purchasePrice.text),
+        images: urls,
+        category: selectedCategory,
+        subCategory: selectedSubCategory,
+        unitType: selectedUnitType,
+        unit: selectedUnit,
+        discount: double.parse(discountPrice.text),
+        stock: double.parse(stock.text),
+        averageRating: 0,
+      );
       await database.collection("products").doc(id).set(newProduct.toJson());
       print("Product added successfully");
       clearAllField();
     } catch (e) {
       print("Failed to add product: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to add product: $e')),
+      );
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
-    isLoading = false;
-    notifyListeners();
   }
 
   void clearAllField() {
@@ -120,10 +127,61 @@ class AddProductProvider extends ChangeNotifier {
     if (images.length < 6) {
       var response = await picker.pickImage(source: ImageSource.gallery);
       if (response != null) {
-        var imageData =
-            await response.readAsBytes(); // Convert image to byte format
+        var imageData = await response.readAsBytes();
         addImage(imageData);
       }
     }
+  }
+
+  bool _validateInputs(BuildContext context) {
+    if (name.text.isEmpty) {
+      _showError(context, "Name is required.");
+      return false;
+    }
+    if (images.isEmpty) {
+      _showError(context, "At least one image is required.");
+      return false;
+    }
+    if (sellPrice.text.isEmpty || double.tryParse(sellPrice.text) == null) {
+      _showError(context, "Valid sell price is required.");
+      return false;
+    }
+    if (purchasePrice.text.isEmpty ||
+        double.tryParse(purchasePrice.text) == null) {
+      _showError(context, "Valid purchase price is required.");
+      return false;
+    }
+    if (selectedCategory == null) {
+      _showError(context, "Category is required.");
+      return false;
+    }
+    if (selectedSubCategory == null) {
+      _showError(context, "Sub-category is required.");
+      return false;
+    }
+    if (selectedUnitType == null) {
+      _showError(context, "Unit type is required.");
+      return false;
+    }
+    if (selectedUnit == null) {
+      _showError(context, "Unit is required.");
+      return false;
+    }
+    if (discountPrice.text.isEmpty ||
+        double.tryParse(discountPrice.text) == null) {
+      _showError(context, "Valid discount price is required.");
+      return false;
+    }
+    if (stock.text.isEmpty || double.tryParse(stock.text) == null) {
+      _showError(context, "Valid stock is required.");
+      return false;
+    }
+    return true;
+  }
+
+  void _showError(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 }

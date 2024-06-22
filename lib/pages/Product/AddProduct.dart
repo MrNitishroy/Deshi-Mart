@@ -1,3 +1,4 @@
+import 'package:deshi_mart/configs/CustomNotication.dart';
 import 'package:deshi_mart/pages/Product/Widgets/ProductAmount.dart';
 import 'package:deshi_mart/pages/Product/Widgets/ProductDetails.dart';
 import 'package:deshi_mart/pages/Product/Widgets/ProductMeta.dart';
@@ -37,7 +38,7 @@ class AddProduct extends StatelessWidget {
                               name: "Save",
                               icon: Icons.save,
                               onTap: () {
-                                addProductProvider.addProduct();
+                                addProductProvider.addProduct(context);
                               },
                               color: Colors.green);
                     },
@@ -94,7 +95,8 @@ class AddProduct extends StatelessWidget {
                       name: "Close",
                       icon: Icons.close,
                       onTap: () {
-                        context.pop();
+                        // context.pop();
+                        successMessage(context, "Product Added Successfully");
                       },
                       color: Colors.red),
                   SizedBox(width: 20),
@@ -106,7 +108,7 @@ class AddProduct extends StatelessWidget {
                               name: "Save",
                               icon: Icons.save,
                               onTap: () {
-                                addProductProvider.addProduct();
+                                addProductProvider.addProduct(context);
                               },
                               color: Colors.green);
                     },

@@ -211,7 +211,7 @@ class ProductMeta extends StatelessWidget {
                                           ),
                                           height: 100,
                                           width: 100,
-                                          child: Image.network(e)),
+                                          child: Image.memory(e)),
                                       Positioned(
                                           top: 0,
                                           right: 0,

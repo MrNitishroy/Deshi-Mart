@@ -11,6 +11,8 @@ class Product {
   double? unitPrice;
   List<String>? tags;
   String? category;
+  String? subCategory;
+  String? unitType;
   List<String>? images;
   String? createAt;
   String? updatedAt;
@@ -33,6 +35,8 @@ class Product {
       this.unitPrice,
       this.tags,
       this.category,
+      this.subCategory,
+      this.unitType,
       this.images,
       this.createAt,
       this.updatedAt,
@@ -42,7 +46,7 @@ class Product {
       this.discountStartDate,
       this.discountEndData,
       this.supplier,
-      this.averageRating});
+      this.averageRating, });
 
   Product.fromJson(Map<String, dynamic> json) {
     if (json["id"] is String) {
@@ -74,6 +78,12 @@ class Product {
     }
     if (json["category"] is String) {
       category = json["category"];
+    }
+    if (json["subCategory"] is String) {
+      subCategory = json["subCategory"];
+    }
+    if (json["unitType"] is String) {
+      unitType = json["unitType"];
     }
     if (json["images"] is List) {
       images = json["images"] ?? [];
@@ -121,6 +131,8 @@ class Product {
       _data["tags"] = tags;
     }
     _data["category"] = category;
+    _data["subCategory"] = subCategory;
+    _data["unitType"] = unitType;
     if (images != null) {
       _data["images"] = images;
     }

@@ -29,13 +29,19 @@ class AddProduct extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  PrimaryButton(
-                      name: "Save",
-                      icon: Icons.save,
-                      onTap: () {
-                        addProductProvider.printProductsDetails();
-                      },
-                      color: Colors.green),
+                  Consumer<AddProductProvider>(
+                    builder: (context, value, child) {
+                      return value.isLoading
+                          ? CircularProgressIndicator()
+                          : PrimaryButton(
+                              name: "Save",
+                              icon: Icons.save,
+                              onTap: () {
+                                addProductProvider.addProduct();
+                              },
+                              color: Colors.green);
+                    },
+                  ),
                   SizedBox(width: 20),
                   PrimaryButton(
                       name: "Close",
@@ -92,11 +98,19 @@ class AddProduct extends StatelessWidget {
                       },
                       color: Colors.red),
                   SizedBox(width: 20),
-                  PrimaryButton(
-                      name: "Save",
-                      icon: Icons.save,
-                      onTap: () {},
-                      color: Colors.green),
+                  Consumer<AddProductProvider>(
+                    builder: (context, value, child) {
+                      return value.isLoading
+                          ? CircularProgressIndicator()
+                          : PrimaryButton(
+                              name: "Save",
+                              icon: Icons.save,
+                              onTap: () {
+                                addProductProvider.addProduct();
+                              },
+                              color: Colors.green);
+                    },
+                  ),
                   SizedBox(width: 20),
                 ],
               ),

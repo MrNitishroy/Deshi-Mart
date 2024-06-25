@@ -26,11 +26,14 @@ class PrimaryButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   icon,
                   color: isHover ? Colors.white : color,
+                  size: 20,
                 ),
+                SizedBox(width: 10),
                 Text(
                   name,
                   style: TextStyle(

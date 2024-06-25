@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/CategoryProvider.dart';
@@ -156,13 +157,29 @@ class AddCategory extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Consumer<CategoryProvider>(
+                          builder: (context, value, child) {
+                        return value.isLoading
+                            ? CircularProgressIndicator()
+                            : PrimaryButton(
+                                name: "Save",
+                                icon: Icons.save,
+                                onTap: () {
+                                  categoryProvider.addCategory(context);
+                                },
+                                color: Colors.green,
+                              );
+                      }),
+                      SizedBox(
+                        width: 20,
+                      ),
                       PrimaryButton(
-                        name: "Save",
-                        icon: Icons.save,
+                        name: "Close",
+                        icon: Icons.close,
                         onTap: () {
-                          categoryProvider.addCategory(context);
+                          context.pop();
                         },
-                        color: Colors.green,
+                        color: Colors.red,
                       ),
                     ],
                   )

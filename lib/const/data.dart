@@ -1,4 +1,6 @@
+import 'package:deshi_mart/models/Category.dart';
 import 'package:deshi_mart/models/Product.dart';
+import 'package:deshi_mart/models/SubCategory.dart';
 
 var products = [
   Product(
@@ -243,4 +245,20 @@ var products = [
     unitPrice: 18000,
     updatedAt: "",
   ),
+];
+
+var categoryData = [
+  Category(
+    id: "1",
+    title: "Electronic",
+    value: "electronic",
+    coverUrl: "https://th.bing.com/th/id/OIP.EN6R9tEWgyjOqXOSTKR5igHaO0?rs=1&pid=ImgDetMain",
+    subCategories: [
+      SubCategory(
+        id: "1.1",
+        title: "Mobile Phone",
+        value: "mobilephone",
+      ),
+    ],
+  )
 ];

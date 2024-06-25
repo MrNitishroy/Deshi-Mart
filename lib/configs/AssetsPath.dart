@@ -33,3 +33,12 @@ class IconsAssets {
   static String save = "${basePath}save.svg";
   static String notification = "${basePath}notification.svg";
 }
+
+class InfoIconsAssets {
+  static String basePath = "assets/icons/";
+  static String bus = "${basePath}bus.svg";
+  static String food = "${basePath}food.svg";
+  static String leaf = "${basePath}leaf.svg";
+  static String moneybag = "${basePath}moneybag.svg";
+  static String secure = "${basePath}secure.svg";
+}

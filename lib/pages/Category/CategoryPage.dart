@@ -1,3 +1,4 @@
+import 'package:deshi_mart/pages/Category/Widget/CategoryDataTable.dart';
 import 'package:deshi_mart/widgets/MyIconButton.dart';
 import 'package:deshi_mart/widgets/PrimaryButton.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,8 @@ class CategoryPage extends StatelessWidget {
             SizedBox(width: 10),
           ],
         ),
+        SizedBox(height: 20),
+        CategoryDataTable(),
       ],
     );
   }

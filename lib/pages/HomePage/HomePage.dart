@@ -20,30 +20,31 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       drawer: isDesktop ? null : MyDrawer(),
       body: SafeArea(
-        child: Row(
-          children: [
-            if (isDesktop) Expanded(child: MyDrawer()),
-            Expanded(
-              flex: 6,
-              child: Column(
-                children: [
-                  MyAppBar(),
-                  SizedBox(height: 20),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            children: [
+              if (isDesktop) Expanded(child: MyDrawer()),
+              SizedBox(width: 10),
+              Expanded(
+                flex: 6,
+                child: Column(
+                  children: [
+                    MyAppBar(),
+                    SizedBox(height: 20),
+                    Expanded(
+                      child: SingleChildScrollView(
                         child: Consumer<DrawerProvider>(
                           builder: (context, value, child) =>
                               value.pages[value.selectedPageIndex],
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

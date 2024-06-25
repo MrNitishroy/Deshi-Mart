@@ -1,4 +1,3 @@
-import 'package:deshi_mart/configs/AssetsPath.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
@@ -21,11 +20,14 @@ class MyDrawerMenu extends StatelessWidget {
     return ListTile(
       // horizontalTitleGap: 40,
       onTap: onPress,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       title: Text(
         title,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: isSeleted
-                  ? Theme.of(context).colorScheme.primary
+                  ? Theme.of(context).colorScheme.onSurface
                   : Theme.of(context).colorScheme.onPrimaryContainer,
             ),
       ),
@@ -33,11 +35,11 @@ class MyDrawerMenu extends StatelessWidget {
         icon,
         width: 16,
         color: isSeleted
-            ? Theme.of(context).colorScheme.primary
+            ? Theme.of(context).colorScheme.onSurface
             : Theme.of(context).colorScheme.onPrimaryContainer,
       ),
       selected: isSeleted,
-      selectedTileColor: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+      selectedTileColor: Theme.of(context).colorScheme.secondaryContainer,
       selectedColor: Colors.white,
     );
   }

@@ -143,7 +143,7 @@ class ProductMeta extends StatelessWidget {
                           duration: DefaultValue.animationDuration,
                           decoration: BoxDecoration(
                             color: isHover
-                                ? Theme.of(context).colorScheme.background
+                                ? Theme.of(context).colorScheme.surface
                                 : Colors.transparent,
                           ),
                           height: 100,

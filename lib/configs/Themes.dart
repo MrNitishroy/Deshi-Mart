@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 var lightTheme = ThemeData(
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
-      background: backgroundColor,
+      surface: backgroundColor,
       primary: primaryColor,
-      onBackground: onBackgroundColor,
+      onSurface: onBackgroundColor,
       primaryContainer: primaryContainerColor,
       onPrimaryContainer: onPrimaryContainerColor,
     ),
@@ -45,12 +45,14 @@ var lightTheme = ThemeData(
 
 var darkTheme = ThemeData(
     brightness: Brightness.dark,
+    scaffoldBackgroundColor: darkBgColor,
     colorScheme: const ColorScheme.dark(
-      background: darkBgColor,
+      surface: darkBgColor,
       primary: darkPrimaryColor,
-      onBackground: darkOnBackground,
+      onSurface: darkOnBackground,
       primaryContainer: darkPrimaryContaainer,
       onPrimaryContainer: darkOnPrimaryContainerColor,
+      secondaryContainer: darkSecondryContainer,
     ),
     drawerTheme: const DrawerThemeData(
       backgroundColor: darkPrimaryContaainer,

@@ -32,7 +32,7 @@ class _SearchDropDownButtonState extends State<SearchDropDownButton> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton2<String>(

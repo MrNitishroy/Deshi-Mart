@@ -31,7 +31,7 @@ class MyAppBar extends StatelessWidget {
             child: TextFormField(
               decoration: InputDecoration(
                 hintText: "Search here...",
-                fillColor: Theme.of(context).colorScheme.background,
+                fillColor: Theme.of(context).colorScheme.surface,
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -71,7 +71,7 @@ class MyAppBar extends StatelessWidget {
                     child: Text(
                       "N",
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.onBackground,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                     ),
                   ),

@@ -43,6 +43,7 @@ class MyDrawer extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 10),
               Expanded(
                 child: SingleChildScrollView(
                     child: Column(

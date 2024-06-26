@@ -10,10 +10,25 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> loginWithEmailPwd(
       String email, String password, BuildContext context) async {
+    isLoading = true;
+    notifyListeners();
+
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
       successMessage(context, "Login Success");
       context.go("/home");
+    } catch (ex) {
+      errorMessage(context, ex.toString());
+    }
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> logout(BuildContext context) async {
+    try {
+      await auth.signOut();
+      successMessage(context, "Done");
+      context.go("/auth");
     } catch (ex) {
       errorMessage(context, ex.toString());
     }

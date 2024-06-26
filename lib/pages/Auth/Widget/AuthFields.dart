@@ -10,8 +10,9 @@ class AuthFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
-    TextEditingController email = TextEditingController();
-    TextEditingController password = TextEditingController();
+    ValueNotifier<bool> isHide = ValueNotifier<bool>(true);
+    TextEditingController email = TextEditingController(text: "root@gmail.com");
+    TextEditingController password = TextEditingController(text: "rootroot");
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
@@ -78,28 +79,48 @@ class AuthFields extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-              TextFormField(
-                controller: password,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Password is required";
-                  } else if (value.length < 6) {
-                    return "Password must be at least 6 characters long";
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  hintText: "Enter Password",
-                  prefixIcon: Icon(
-                    Icons.lock_open,
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  ),
-                  suffixIcon: Icon(
-                    Icons.remove_red_eye,
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  ),
-                ),
-              ),
+              ValueListenableBuilder(
+                  valueListenable: isHide,
+                  builder: (context, value, _) {
+                    return TextFormField(
+                      controller: password,
+                      obscureText: isHide.value,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Password is required";
+                        } else if (value.length < 6) {
+                          return "Password must be at least 6 characters long";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Enter Password",
+                        prefixIcon: Icon(
+                          Icons.lock_open,
+                          color:
+                              Theme.of(context).colorScheme.onPrimaryContainer,
+                        ),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            isHide.value = !isHide.value;
+                          },
+                          child: isHide.value
+                              ? Icon(
+                                  Icons.visibility_off,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
+                                )
+                              : Icon(
+                                  Icons.remove_red_eye,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
+                                ),
+                        ),
+                      ),
+                    );
+                  }),
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -114,17 +135,21 @@ class AuthFields extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 30),
-              PrimaryButton(
-                name: "LOGIN",
-                icon: Icons.lock,
-                onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    authProvider.loginWithEmailPwd(
-                        email.text, password.text, context);
-                  }
-                },
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              Consumer<AuthProvider>(builder: (context, value, _) {
+                return value.isLoading
+                    ? LinearProgressIndicator()
+                    : PrimaryButton(
+                        name: "LOGIN",
+                        icon: Icons.lock,
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {
+                            authProvider.loginWithEmailPwd(
+                                email.text, password.text, context);
+                          }
+                        },
+                        color: Theme.of(context).colorScheme.primary,
+                      );
+              }),
               SizedBox(height: 10),
               Row(
                 children: [

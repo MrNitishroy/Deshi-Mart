@@ -6,7 +6,7 @@ ToastificationItem successMessage(BuildContext context, String message) {
     context: context,
     type: ToastificationType.success,
     style: ToastificationStyle.minimal,
-    autoCloseDuration: const Duration(seconds: 5),
+    autoCloseDuration: const Duration(seconds: 2),
     title: Text(
       message,
       style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -76,7 +76,7 @@ ToastificationItem warningMessage(BuildContext context, String message) {
     context: context,
     type: ToastificationType.warning,
     style: ToastificationStyle.minimal,
-    autoCloseDuration: const Duration(seconds: 5),
+    autoCloseDuration: const Duration(seconds: 2),
     title: Text(
       message,
       style: Theme.of(context).textTheme.titleMedium!.copyWith(

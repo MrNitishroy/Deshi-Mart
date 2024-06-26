@@ -1,5 +1,7 @@
+import 'package:deshi_mart/providers/AuthProvider.dart';
 import 'package:deshi_mart/widgets/MyIconButton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'ResponsiveLayout.dart';
 
@@ -11,6 +13,7 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDesktop = Responsive.isDesktop(context);
+    final authProvider = Provider.of<AuthProvider>(context);
     return Container(
       height: 70,
       decoration: BoxDecoration(
@@ -56,8 +59,25 @@ class MyAppBar extends StatelessWidget {
             ],
           ),
           SizedBox(width: 20),
-          InkWell(
-            onTap: () {},
+          SizedBox(width: 20),
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'logout') {
+                authProvider.logout(context);
+              } else if (value == 'profile') {}
+            },
+            tooltip: "",
+            position: PopupMenuPosition.under,
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem<String>(
+                value: 'profile',
+                child: Text('Profile Settings'),
+              ),
+              PopupMenuItem<String>(
+                value: 'logout',
+                child: Text('Logout'),
+              ),
+            ],
             child: Container(
               padding: EdgeInsets.all(7),
               decoration: BoxDecoration(
@@ -69,7 +89,7 @@ class MyAppBar extends StatelessWidget {
                   CircleAvatar(
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     child: Text(
-                      "N",
+                      authProvider.auth.currentUser!.email![0].toUpperCase(),
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Theme.of(context).colorScheme.onSurface,
                           ),
@@ -77,7 +97,7 @@ class MyAppBar extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   Text(
-                    "Nitish Kumar",
+                    authProvider.auth.currentUser!.email ?? "Root",
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Theme.of(context).colorScheme.primary),
                   ),
@@ -90,7 +110,6 @@ class MyAppBar extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 20),
         ],
       ),
     );

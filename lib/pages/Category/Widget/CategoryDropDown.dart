@@ -23,10 +23,19 @@ class _CategorySearchDropDownButtonState
     extends State<CategorySearchDropDownButton> {
   Category? selectedValue;
   final TextEditingController textEditingController = TextEditingController();
+  final FocusNode textFocusNode = FocusNode(); // Add this line
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    textFocusNode.hasFocus;
+  }
 
   @override
   void dispose() {
     textEditingController.dispose();
+    textFocusNode.dispose(); // Add this line
     super.dispose();
   }
 
@@ -39,6 +48,7 @@ class _CategorySearchDropDownButtonState
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton2<Category>(
+          focusNode: textFocusNode,
           isExpanded: true,
           hint: Text(
             widget.hintText,
@@ -64,6 +74,7 @@ class _CategorySearchDropDownButtonState
               selectedValue = value;
             });
             widget.selectedValue(value);
+            textFocusNode.requestFocus(); // Set focus to the TextFormField
           },
           buttonStyleData: const ButtonStyleData(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -87,6 +98,7 @@ class _CategorySearchDropDownButtonState
                 left: 8,
               ),
               child: TextFormField(
+                focusNode: textFocusNode, // Set the focus node
                 expands: true,
                 maxLines: null,
                 controller: textEditingController,

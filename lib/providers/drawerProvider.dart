@@ -6,7 +6,7 @@ import 'package:deshi_mart/pages/Settings/SettingsPage.dart';
 import 'package:flutter/material.dart';
 
 class DrawerProvider extends ChangeNotifier {
-  int selectedPageIndex = 2;
+  int selectedPageIndex = 1;
   var pages = [
     DashBoard(),
     ProductPage(),

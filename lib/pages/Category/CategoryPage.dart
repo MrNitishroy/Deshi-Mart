@@ -3,14 +3,23 @@ import 'package:deshi_mart/widgets/MyIconButton.dart';
 import 'package:deshi_mart/widgets/PrimaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/CategoryProvider.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final categoryProvider =
+        Provider.of<CategoryProvider>(context, listen: false);
     return Column(
       children: [
+        Consumer<CategoryProvider>(builder: (context, value, chil) {
+          return value.isLoading ? LinearProgressIndicator() : SizedBox();
+        }),
+        SizedBox(height: 10),
         Row(
           children: [
             Container(
@@ -32,7 +41,9 @@ class CategoryPage extends StatelessWidget {
             MyIconButton(
               icon: Icons.refresh,
               color: Colors.orange,
-              onTap: () {},
+              onTap: () {
+                categoryProvider.getAllCatgories();
+              },
             ),
             SizedBox(width: 10),
             PrimaryButton(
@@ -54,7 +65,9 @@ class CategoryPage extends StatelessWidget {
           ],
         ),
         SizedBox(height: 20),
-        CategoryDataTable(),
+        Consumer<CategoryProvider>(builder: (context, value, chil) {
+          return value.isLoading ? SizedBox() : CategoryDataTable();
+        })
       ],
     );
   }

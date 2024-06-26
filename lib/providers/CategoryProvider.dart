@@ -7,22 +7,47 @@ import 'package:uuid/uuid.dart';
 import '../models/Category.dart';
 
 class CategoryProvider extends ChangeNotifier {
+  CategoryProvider() {
+    getAllCatgories();
+  }
+
   TextEditingController categoryName = TextEditingController();
   TextEditingController subCategory = TextEditingController();
   final uuid = Uuid();
   final db = FirebaseFirestore.instance;
   List<SubCategory> subCategories = [];
   bool isLoading = false;
+  List<Category> categories = [];
 
-  List<Category> categories = [
-    Category(
-        id: "1",
-        title: "Mobile Phone",
-        value: "mobile_phone",
-        subCategories: [
-          SubCategory(id: "1.1", title: "Smart Phone", value: "smart_phone"),
-        ]),
-  ];
+  Future<void> getAllCatgories() async {
+    isLoading = true;
+    notifyListeners();
+    categories.clear();
+    try {
+      var categorie = await db.collection("Categories").orderBy("title").get();
+      for (var category in categorie.docs) {
+        categories.add(
+          Category.fromJson(category.data()),
+        );
+      }
+    } catch (ex) {
+      print("error while geting data");
+    }
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> addCategoriesBulk() async {
+    for (var category in categories) {
+      await db.collection("Categories").doc(category.id).set(
+            category.toJson(),
+          );
+
+      print("Categry ${category.id} added");
+    }
+    print("Data added");
+  }
+
   // Add Category to database
   Future<void> addCategory(BuildContext context) async {
     isLoading = true;

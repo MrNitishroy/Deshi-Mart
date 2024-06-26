@@ -2,9 +2,11 @@ import 'package:deshi_mart/configs/AssetsPath.dart';
 import 'package:deshi_mart/configs/Colors.dart';
 import 'package:deshi_mart/models/Category.dart';
 import 'package:deshi_mart/models/Product.dart';
+import 'package:deshi_mart/providers/CategoryProvider.dart';
 import 'package:deshi_mart/widgets/MyIconButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../const/data.dart';
@@ -14,7 +16,8 @@ class CategoryDataTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryDataSource = CategoryDataSource(categoryData);
+    final categoryProvider = Provider.of<CategoryProvider>(context);
+    final categoryDataSource = CategoryDataSource(categoryProvider.categories);
     return Container(
       height: 600,
       decoration: BoxDecoration(
@@ -105,7 +108,12 @@ class CategoryDataSource extends DataGridSource {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.green.withOpacity(0.2),
                   ),
-                  child: SvgPicture.asset(IconsAssets.box),
+                  child: SizedBox(
+                    child: SvgPicture.asset(
+                      IconsAssets.box,
+                      width: 30,
+                    ),
+                  ),
                 )
               : Container(
                   padding: EdgeInsets.all(10),

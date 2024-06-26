@@ -1,3 +1,8 @@
+import 'package:deshi_mart/models/Category.dart';
+import 'package:deshi_mart/models/SubCategory.dart';
+import 'package:deshi_mart/pages/Category/Widget/CategoryDropDown.dart';
+import 'package:deshi_mart/pages/Category/Widget/SubCategory.dart';
+import 'package:deshi_mart/providers/CategoryProvider.dart';
 import 'package:deshi_mart/widgets/MyDropDownButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,11 +17,9 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var category = [
-      "Electronic",
-      "Clothing",
-    ];
+    final subCategory = ValueNotifier<List<SubCategory>>([]);
     final addProductProvider = Provider.of<AddProductProvider>(context);
+    final categoryProvider = Provider.of<CategoryProvider>(context);
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -84,15 +87,18 @@ class ProductDetails extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10),
-                SearchDropDownButton(
-                  items: category,
-                  selectedValue: (value) {
-                    if (value != null) {
-                      addProductProvider.selectedCategory = value;
-                    }
-                  },
-                  hintText: "Select Category",
-                ),
+                Consumer<CategoryProvider>(builder: (context, valu, child) {
+                  return CategorySearchDropDownButton(
+                    items: valu.categories,
+                    selectedValue: (value) {
+                      if (value != null) {
+                        subCategory.value = value.subCategories!;
+                        addProductProvider.selectedCategory = value.title!;
+                      }
+                    },
+                    hintText: "Select Category",
+                  );
+                }),
                 SizedBox(height: 20),
                 Row(
                   children: [
@@ -103,15 +109,19 @@ class ProductDetails extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10),
-                SearchDropDownButton(
-                  items: category,
-                  selectedValue: (value) {
-                    if (value != null) {
-                      addProductProvider.selectedSubCategory = value;
-                    }
-                  },
-                  hintText: "Select Sub Category",
-                ),
+                ValueListenableBuilder(
+                    valueListenable: subCategory,
+                    builder: (context, value, child) {
+                      return SubCategorySearchDropDownButton(
+                        items: subCategory.value,
+                        selectedValue: (value) {
+                          if (value != null) {
+                            addProductProvider.selectedCategory = value.title!;
+                          }
+                        },
+                        hintText: "Select Sub Category",
+                      );
+                    }),
                 SizedBox(height: 20),
                 // Row(
                 //   children: [

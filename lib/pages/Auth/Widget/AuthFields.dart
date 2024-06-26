@@ -1,4 +1,6 @@
+import 'package:deshi_mart/providers/AuthProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../widgets/PrimaryButton.dart';
 
@@ -10,6 +12,7 @@ class AuthFields extends StatelessWidget {
     final _formKey = GlobalKey<FormState>();
     TextEditingController email = TextEditingController();
     TextEditingController password = TextEditingController();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
         color: Theme.of(context).colorScheme.secondaryContainer,
@@ -115,7 +118,10 @@ class AuthFields extends StatelessWidget {
                 name: "LOGIN",
                 icon: Icons.lock,
                 onTap: () {
-                  if (_formKey.currentState!.validate()) {}
+                  if (_formKey.currentState!.validate()) {
+                    authProvider.loginWithEmailPwd(
+                        email.text, password.text, context);
+                  }
                 },
                 color: Theme.of(context).colorScheme.primary,
               ),

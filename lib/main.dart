@@ -1,6 +1,7 @@
 import 'package:deshi_mart/configs/PageRoutes.dart';
 import 'package:deshi_mart/configs/Themes.dart';
 import 'package:deshi_mart/firebase_options.dart';
+import 'package:deshi_mart/providers/AuthProvider.dart';
 import 'package:deshi_mart/providers/DrawerProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => DrawerProvider()),
       ChangeNotifierProvider(create: (_) => AddProductProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
+      ChangeNotifierProvider(create: (_) => AuthProvider()),
     ], child: const MyApp()),
   );
 }

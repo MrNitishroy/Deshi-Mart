@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     MyAppBar(),
-                    SizedBox(height: 20),
+                    // SizedBox(height: 10),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Consumer<DrawerProvider>(

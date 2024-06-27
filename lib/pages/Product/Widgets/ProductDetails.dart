@@ -116,7 +116,9 @@ class ProductDetails extends StatelessWidget {
                         items: subCategory.value,
                         selectedValue: (value) {
                           if (value != null) {
-                            addProductProvider.selectedCategory = value.title!;
+                            print(value.title);
+                            addProductProvider.selectedSubCategory =
+                                value.title!;
                           }
                         },
                         hintText: "Select Sub Category",

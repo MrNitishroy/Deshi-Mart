@@ -82,10 +82,7 @@ class AddProductProvider extends ChangeNotifier {
     stock.clear();
     tags.clear();
     images.clear();
-    selectedCategory = "";
-    selectedSubCategory = "";
-    selectedUnitType = "";
-    selectedUnit = "";
+
     notifyListeners();
   }
 

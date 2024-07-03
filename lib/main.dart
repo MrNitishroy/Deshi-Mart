@@ -3,6 +3,7 @@ import 'package:deshi_mart/configs/Themes.dart';
 import 'package:deshi_mart/firebase_options.dart';
 import 'package:deshi_mart/providers/AuthProvider.dart';
 import 'package:deshi_mart/providers/DrawerProvider.dart';
+import 'package:deshi_mart/providers/ThemeProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => AddProductProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ChangeNotifierProvider(create: (_) => ThemeProvider()),
     ], child: const MyApp()),
   );
 }
@@ -31,23 +33,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: 'Deshi Mart',
-      theme: lightTheme,
-      builder: (context, child) {
-        return ToastificationConfigProvider(
-          config: const ToastificationConfig(
-            alignment: Alignment.center,
-            itemWidth: 440,
-            animationDuration: Duration(milliseconds: 500),
-          ),
-          child: child!,
-        );
-      },
-      themeMode: ThemeMode.dark,
-      darkTheme: darkTheme,
-      routerConfig: router,
-    );
+    return Consumer<ThemeProvider>(builder: (context, value, _) {
+      return MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: 'Deshi Mart',
+        theme: lightTheme,
+        builder: (context, child) {
+          return ToastificationConfigProvider(
+            config: const ToastificationConfig(
+              alignment: Alignment.center,
+              itemWidth: 440,
+              animationDuration: Duration(milliseconds: 500),
+            ),
+            child: child!,
+          );
+        },
+        themeMode: value.themeMode,
+        darkTheme: darkTheme,
+        routerConfig: router,
+      );
+    });
   }
 }

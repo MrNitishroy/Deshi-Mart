@@ -62,14 +62,16 @@ class MyAppBar extends StatelessWidget {
           SizedBox(width: 20),
           PopupMenuButton<String>(
             onSelected: (value) {
-              if (value == 'logout') {
+              if (value == "profile") {
+                print("Go to Profile Page");
+              } else if (value == 'logout') {
                 authProvider.logout(context);
               } else if (value == 'profile') {}
             },
             tooltip: "",
             position: PopupMenuPosition.under,
             itemBuilder: (BuildContext context) => [
-              PopupMenuItem<String>(
+              const PopupMenuItem<String>(
                 value: 'profile',
                 child: Text('Profile Settings'),
               ),

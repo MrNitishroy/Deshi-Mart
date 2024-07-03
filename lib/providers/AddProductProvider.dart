@@ -9,6 +9,10 @@ import 'package:uuid/uuid.dart';
 import '../configs/CustomNotication.dart';
 
 class AddProductProvider extends ChangeNotifier {
+  AddProductProvider() {
+    getProducts();
+  }
+
   final ImagePicker picker = ImagePicker();
   List<Uint8List> images = [];
   TextEditingController name = TextEditingController();
@@ -21,6 +25,7 @@ class AddProductProvider extends ChangeNotifier {
   final db = FirebaseStorage.instance;
   final database = FirebaseFirestore.instance;
   final uuid = Uuid();
+  List<Product> products = [];
   String selectedCategory = "";
   String selectedSubCategory = "";
   String selectedUnitType = "";
@@ -41,6 +46,20 @@ class AddProductProvider extends ChangeNotifier {
     print("Images : $images");
   }
 
+  Future<void> getProducts() async {
+    isLoading = true;
+    notifyListeners();
+    try {
+      var response = await database.collection("products").get();
+      products = response.docs.map((e) => Product.fromJson(e.data())).toList();
+      print(products[0]);
+    } catch (ex) {
+      print(ex.toString());
+    }
+    isLoading = false;
+    notifyListeners();
+  }
+
   Future<void> addProduct(BuildContext context) async {
     if (!_validateInputs(context)) return;
     isLoading = true;
@@ -51,6 +70,7 @@ class AddProductProvider extends ChangeNotifier {
       Product newProduct = Product(
         id: id,
         name: name.text,
+        createAt: DateTime.now().toString(),
         description: description.text,
         sellPrice: double.parse(sellPrice.text),
         purchasePrice: double.parse(purchasePrice.text),
@@ -62,6 +82,14 @@ class AddProductProvider extends ChangeNotifier {
         discount: double.parse(discountPrice.text),
         stock: double.parse(stock.text),
         averageRating: 0,
+        discountEndData: "",
+        discountStartDate: "",
+        isActive: true,
+        reviews: [],
+        supplier: "",
+        tags: [],
+        unitPrice: 0,
+        updatedAt: DateTime.now().toString(),
       );
       await database.collection("products").doc(id).set(newProduct.toJson());
       successMessage(context, "Product added");
@@ -82,7 +110,6 @@ class AddProductProvider extends ChangeNotifier {
     stock.clear();
     tags.clear();
     images.clear();
-
     notifyListeners();
   }
 

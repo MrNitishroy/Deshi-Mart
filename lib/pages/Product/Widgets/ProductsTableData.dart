@@ -2,16 +2,19 @@ import 'package:deshi_mart/configs/Colors.dart';
 import 'package:deshi_mart/models/Product.dart';
 import 'package:deshi_mart/widgets/MyIconButton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../const/data.dart';
+import '../../../providers/AddProductProvider.dart';
 
 class ProductsTableData extends StatelessWidget {
   const ProductsTableData({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final productDataSource = ProductDataSource(products);
+    final productProvider = Provider.of<AddProductProvider>(context);
+    final productDataSource = ProductDataSource(productProvider.products);
     return Container(
       height: 600,
       decoration: BoxDecoration(

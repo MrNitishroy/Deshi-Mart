@@ -32,11 +32,13 @@ class _SplaceScreenState extends State<SplaceScreen>
   }
 
   Future<void> splaceHandle() async {
-    if (auth.currentUser != null) {
-      context.go("/home");
-    } else {
-      context.go("/auth");
-    }
+    await Future.delayed(Duration(seconds: 4)).then((d) {
+      if (auth.currentUser != null) {
+        context.go("/home");
+      } else {
+        context.go("/auth");
+      }
+    });
   }
 
   @override

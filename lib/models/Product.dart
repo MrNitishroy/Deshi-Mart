@@ -24,97 +24,57 @@ class Product {
   String? supplier;
   double? averageRating;
 
-  Product(
-      {this.id,
-      this.name,
-      this.description,
-      this.stock,
-      this.sellPrice,
-      this.purchasePrice,
-      this.unit,
-      this.unitPrice,
-      this.tags,
-      this.category,
-      this.subCategory,
-      this.unitType,
-      this.images,
-      this.createAt,
-      this.updatedAt,
-      this.isActive,
-      this.reviews,
-      this.discount,
-      this.discountStartDate,
-      this.discountEndData,
-      this.supplier,
-      this.averageRating, });
+  Product({
+    this.id,
+    this.name,
+    this.description,
+    this.stock,
+    this.sellPrice,
+    this.purchasePrice,
+    this.unit,
+    this.unitPrice,
+    this.tags,
+    this.category,
+    this.subCategory,
+    this.unitType,
+    this.images,
+    this.createAt,
+    this.updatedAt,
+    this.isActive,
+    this.reviews,
+    this.discount,
+    this.discountStartDate,
+    this.discountEndData,
+    this.supplier,
+    this.averageRating,
+  });
 
   Product.fromJson(Map<String, dynamic> json) {
-    if (json["id"] is String) {
-      id = json["id"];
-    }
-    if (json["name"] is String) {
-      name = json["name"];
-    }
-    if (json["description"] is String) {
-      description = json["description"];
-    }
-    if (json["stock"] is double) {
-      stock = json["stock"];
-    }
-    if (json["sellPrice"] is double) {
-      sellPrice = json["sellPrice"];
-    }
-    if (json["purchasePrice"] is double) {
-      purchasePrice = json["purchasePrice"];
-    }
-    if (json["unit"] is String) {
-      unit = json["unit"];
-    }
-    if (json["unitPrice"] is double) {
-      unitPrice = json["unitPrice"];
-    }
-    if (json["tags"] is List) {
-      tags = json["tags"] ?? [];
-    }
-    if (json["category"] is String) {
-      category = json["category"];
-    }
-    if (json["subCategory"] is String) {
-      subCategory = json["subCategory"];
-    }
-    if (json["unitType"] is String) {
-      unitType = json["unitType"];
-    }
-    if (json["images"] is List) {
-      images = json["images"] ?? [];
-    }
-    if (json["createAt"] is String) {
-      createAt = json["createAt"];
-    }
-    if (json["updatedAt"] is String) {
-      updatedAt = json["updatedAt"];
-    }
-    if (json["isActive"] is bool) {
-      isActive = json["isActive"];
-    }
-    if (json["reviews"] is List) {
-      reviews = json["reviews"] ?? [];
-    }
-    if (json["discount"] is double) {
-      discount = json["discount"];
-    }
-    if (json["discountStartDate"] is String) {
-      discountStartDate = json["discountStartDate"];
-    }
-    if (json["discountEndData"] is String) {
-      discountEndData = json["discountEndData"];
-    }
-    if (json["supplier"] is String) {
-      supplier = json["supplier"];
-    }
-    if (json["averageRating"] is double) {
-      averageRating = json["averageRating"];
-    }
+    id = json["id"] as String?;
+    name = json["name"] as String?;
+    description = json["description"] as String?;
+    stock = (json["stock"] as num?)?.toDouble();
+    sellPrice = (json["sellPrice"] as num?)?.toDouble();
+    purchasePrice = (json["purchasePrice"] as num?)?.toDouble();
+    unit = json["unit"] as String?;
+    unitPrice = (json["unitPrice"] as num?)?.toDouble();
+    tags = (json["tags"] as List<dynamic>?)?.map((e) => e as String).toList();
+    category = json["category"] as String?;
+    subCategory = json["subCategory"] as String?;
+    unitType = json["unitType"] as String?;
+    images =
+        (json["images"] as List<dynamic>?)?.map((e) => e as String).toList();
+    createAt = json["createAt"] as String?;
+    updatedAt = json["updatedAt"] as String?;
+    isActive = json["isActive"] as bool?;
+    reviews = (json["reviews"] as List<dynamic>?)
+        ?.map((e) => Review.fromJson(e as Map<String, dynamic>))
+        .toList();
+    discount = (json["discount"] as num?)?.toDouble();
+    discountStartDate = json["discountStartDate"] as String?;
+    discountEndData = json["discountEndData"] as String?;
+    supplier = json["supplier"] as String?;
+    averageRating = (json["averageRating"] as num?)?.toDouble();
   }
 
   Map<String, dynamic> toJson() {
@@ -127,20 +87,16 @@ class Product {
     _data["purchasePrice"] = purchasePrice;
     _data["unit"] = unit;
     _data["unitPrice"] = unitPrice;
-    if (tags != null) {
-      _data["tags"] = tags;
-    }
+    _data["tags"] = tags;
     _data["category"] = category;
     _data["subCategory"] = subCategory;
     _data["unitType"] = unitType;
-    if (images != null) {
-      _data["images"] = images;
-    }
+    _data["images"] = images;
     _data["createAt"] = createAt;
     _data["updatedAt"] = updatedAt;
     _data["isActive"] = isActive;
     if (reviews != null) {
-      _data["reviews"] = reviews;
+      _data["reviews"] = reviews!.map((e) => e.toJson()).toList();
     }
     _data["discount"] = discount;
     _data["discountStartDate"] = discountStartDate;
@@ -150,30 +106,3 @@ class Product {
     return _data;
   }
 }
-
-
-
-
-// {
-//   "id":"",
-//   "name":"",
-//   "description":"",
-//   "stock":2.3,
-//   "sellPrice":2.3,
-//   "purchasePrice":2.3,
-//   "unit":"",
-//   "unitPrice":1.2,
-//   "tags":[],
-//   "category":"",
-//   "images":[],
-//   "createAt":"",
-//   "updatedAt":"",
-//   "isActive":false,
-//   "reviews":[],
-//   "discount":2.3,
-//   "discountStartDate":"",
-//   "discountEndData":"",
-//   "supplier":"",
-//   "averageRating":2.4
-
-// }

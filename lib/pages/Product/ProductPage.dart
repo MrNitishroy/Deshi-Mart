@@ -1,9 +1,11 @@
 import 'package:deshi_mart/const/data.dart';
 import 'package:deshi_mart/pages/Product/Widgets/ProductsTableData.dart';
+import 'package:deshi_mart/providers/AddProductProvider.dart';
 import 'package:deshi_mart/widgets/MyIconButton.dart';
 import 'package:deshi_mart/widgets/PrimaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -12,6 +14,10 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Consumer<AddProductProvider>(builder: (context, value, chil) {
+          return value.isLoading ? LinearProgressIndicator() : SizedBox();
+        }),
+        SizedBox(height: 10),
         Row(
           children: [
             Row(
@@ -59,7 +65,9 @@ class ProductPage extends StatelessWidget {
           ],
         ),
         SizedBox(height: 20),
-        ProductsTableData(),
+        Consumer<AddProductProvider>(builder: (context, value, child) {
+          return value.isLoading ? SizedBox() : ProductsTableData();
+        })
       ],
     );
   }

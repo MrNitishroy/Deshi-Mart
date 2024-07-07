@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 
-import 'providers/AddProductProvider.dart';
+import 'providers/ProductProvider.dart';
 import 'providers/CategoryProvider.dart';
 
 void main() async {

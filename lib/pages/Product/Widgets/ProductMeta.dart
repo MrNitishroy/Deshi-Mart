@@ -1,4 +1,4 @@
-import 'package:deshi_mart/providers/AddProductProvider.dart';
+import 'package:deshi_mart/providers/ProductProvider.dart';
 import 'package:deshi_mart/widgets/HoverEffect.dart';
 import 'package:deshi_mart/widgets/MyDropDownButton.dart';
 import 'package:dotted_border/dotted_border.dart';

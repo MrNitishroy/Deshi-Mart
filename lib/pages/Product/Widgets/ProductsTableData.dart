@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../const/data.dart';
-import '../../../providers/AddProductProvider.dart';
+import '../../../providers/ProductProvider.dart';
 
 class ProductsTableData extends StatelessWidget {
   const ProductsTableData({super.key});

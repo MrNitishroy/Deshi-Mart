@@ -53,11 +53,12 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCgKGf285IqCnAmXmn3QnSPBMfU_pN_Afc',
-    appId: '1:812098578997:web:8847c49da372d08ad89f7c',
-    messagingSenderId: '812098578997',
-    projectId: 'desimart-6bf65',
-    authDomain: 'desimart-6bf65.firebaseapp.com',
-    storageBucket: 'desimart-6bf65.appspot.com',
+    apiKey: 'AIzaSyC3NFAkG7UEBCzF9AjbaHsL6zJlrpNm0s4',
+    appId: '1:950668550936:web:a653c360594b2f7d75f46d',
+    messagingSenderId: '950668550936',
+    projectId: 'ecommerce-c6637',
+    authDomain: 'ecommerce-c6637.firebaseapp.com',
+    storageBucket: 'ecommerce-c6637.appspot.com',
   );
+
 }

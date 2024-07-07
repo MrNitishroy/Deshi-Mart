@@ -11,7 +11,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
-import '../../providers/AddProductProvider.dart';
+import '../../providers/ProductProvider.dart';
 import '../../widgets/ResponsiveLayout.dart';
 
 class AddProduct extends StatelessWidget {

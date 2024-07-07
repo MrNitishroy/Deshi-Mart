@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/AddProductProvider.dart';
+import '../../../providers/ProductProvider.dart';
 
 class ProductDetails extends StatelessWidget {
   const ProductDetails({

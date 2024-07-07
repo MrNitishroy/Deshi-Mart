@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/AddProductProvider.dart';
+import '../../../providers/ProductProvider.dart';
 
 class ProductAmount extends StatelessWidget {
   const ProductAmount({

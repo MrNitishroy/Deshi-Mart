@@ -1,4 +1,4 @@
-import 'package:deshi_mart/pages/Category/Widget/CategoryDataTable.dart';
+import 'package:deshi_mart/pages/Catregory/Widget/CategoryData.dart';
 import 'package:deshi_mart/widgets/MyIconButton.dart';
 import 'package:deshi_mart/widgets/PrimaryButton.dart';
 import 'package:flutter/material.dart';

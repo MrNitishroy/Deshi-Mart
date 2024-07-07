@@ -1,6 +1,9 @@
-
+import 'package:deshi_mart/models/SubCategory.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+
+import '../configs/Notification.dart';
+import '../models/Category.dart';
 
 class CategoryProvider extends ChangeNotifier {
   CategoryProvider() {
@@ -10,7 +13,7 @@ class CategoryProvider extends ChangeNotifier {
   TextEditingController categoryName = TextEditingController();
   TextEditingController subCategory = TextEditingController();
   final uuid = Uuid();
-  final db = FirebaseFirestore.instance;
+
   List<SubCategory> subCategories = [];
   bool isLoading = false;
   List<Category> categories = [];
@@ -20,12 +23,7 @@ class CategoryProvider extends ChangeNotifier {
     notifyListeners();
     categories.clear();
     try {
-      var categorie = await db.collection("Categories").orderBy("title").get();
-      for (var category in categorie.docs) {
-        categories.add(
-          Category.fromJson(category.data()),
-        );
-      }
+    
     } catch (ex) {
       print("error while geting data");
     }
@@ -35,10 +33,7 @@ class CategoryProvider extends ChangeNotifier {
 
   Future<void> addCategoriesBulk() async {
     for (var category in categories) {
-      await db.collection("Categories").doc(category.id).set(
-            category.toJson(),
-          );
-
+   
       print("Categry ${category.id} added");
     }
     print("Data added");
@@ -58,9 +53,7 @@ class CategoryProvider extends ChangeNotifier {
       );
 
       try {
-        await db.collection("Categories").doc(id).set(
-              newCategory.toJson(),
-            );
+   
         successMessage(context, "Category added successfully");
       } catch (ex) {
         errorMessage(context, ex.toString());

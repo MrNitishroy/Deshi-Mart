@@ -3,6 +3,7 @@ import 'package:deshi_mart/pages/Dashboard/Widgets/OrderHistory.dart';
 import 'package:deshi_mart/pages/Dashboard/Widgets/Statics.dart';
 import 'package:deshi_mart/widgets/MyIconButton.dart';
 import 'package:deshi_mart/widgets/PrimaryButton.dart';
+import 'package:deshi_mart/widgets/ResponsiveLayout.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,6 +35,7 @@ class DashBoard extends StatelessWidget {
         "value": "32",
       },
     ];
+    bool isDesktop = Responsive.isDesktop(context);
     return Column(
       children: [
         Row(
@@ -81,7 +83,7 @@ class DashBoard extends StatelessWidget {
           ],
         ),
         SizedBox(height: 30),
-        Row(
+        isDesktop ? Row(
           children: statics
               .map(
                 (e) => Expanded(
@@ -90,7 +92,9 @@ class DashBoard extends StatelessWidget {
                 ),
               )
               .toList(),
-        ),
+        ): GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), itemBuilder: (context,index){
+          
+        }),
         SizedBox(height: 30),
         Orderhistory(),
         SizedBox(height: 30),

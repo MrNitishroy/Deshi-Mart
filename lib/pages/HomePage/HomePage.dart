@@ -1,5 +1,3 @@
-import 'package:deshi_mart/configs/AssetsPath.dart';
-import 'package:deshi_mart/pages/Dashboard/Dashboard.dart';
 import 'package:deshi_mart/providers/DrawerProvider.dart';
 import 'package:deshi_mart/widgets/AppBar.dart';
 import 'package:deshi_mart/widgets/MyDrawer.dart';
@@ -8,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-import '../../widgets/DrawerMenu.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

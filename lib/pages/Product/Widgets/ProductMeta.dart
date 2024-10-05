@@ -113,7 +113,7 @@ class ProductMeta extends StatelessWidget {
                 Divider(
                   color: Theme.of(context)
                       .colorScheme
-                      .onBackground
+                      .onSurface
                       .withOpacity(0.1),
                 ),
                 SizedBox(height: 20),
@@ -134,7 +134,7 @@ class ProductMeta extends StatelessWidget {
                       radius: Radius.circular(20),
                       color: Theme.of(context)
                           .colorScheme
-                          .onBackground
+                          .onSurface
                           .withOpacity(0.1),
                       strokeWidth: 1,
                       dashPattern: [5, 7],
@@ -177,7 +177,7 @@ class ProductMeta extends StatelessWidget {
                   radius: Radius.circular(20),
                   color: Theme.of(context)
                       .colorScheme
-                      .onBackground
+                      .onSurface
                       .withOpacity(0.1),
                   strokeWidth: 1,
                   dashPattern: [5, 7],

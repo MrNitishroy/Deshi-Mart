@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-import '../../../const/data.dart';
 import '../../../providers/AddProductProvider.dart';
 
 class ProductsTableData extends StatelessWidget {

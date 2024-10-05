@@ -1,14 +1,13 @@
 import 'package:deshi_mart/models/Category.dart';
-import 'package:deshi_mart/models/SubCategory.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
-class SubCategorySearchDropDownButton extends StatefulWidget {
-  final List<SubCategory> items;
-  final ValueChanged<SubCategory?> selectedValue;
+class CategorySearchDropDownButton extends StatefulWidget {
+  final List<Category> items;
+  final ValueChanged<Category?> selectedValue;
   final String hintText;
 
-  const SubCategorySearchDropDownButton({
+  const CategorySearchDropDownButton({
     super.key,
     required this.items,
     required this.selectedValue,
@@ -16,13 +15,13 @@ class SubCategorySearchDropDownButton extends StatefulWidget {
   });
 
   @override
-  State<SubCategorySearchDropDownButton> createState() =>
-      _SubCategorySearchDropDownButtonState();
+  State<CategorySearchDropDownButton> createState() =>
+      _CategorySearchDropDownButtonState();
 }
 
-class _SubCategorySearchDropDownButtonState
-    extends State<SubCategorySearchDropDownButton> {
-  SubCategory? selectedValue;
+class _CategorySearchDropDownButtonState
+    extends State<CategorySearchDropDownButton> {
+  Category? selectedValue;
   final TextEditingController textEditingController = TextEditingController();
   final FocusNode textFocusNode = FocusNode(); // Add this line
 
@@ -36,8 +35,8 @@ class _SubCategorySearchDropDownButtonState
   @override
   void dispose() {
     textEditingController.dispose();
+    textFocusNode.dispose(); // Add this line
     super.dispose();
-    textFocusNode.dispose();
   }
 
   @override
@@ -48,7 +47,7 @@ class _SubCategorySearchDropDownButtonState
         color: Theme.of(context).colorScheme.surface,
       ),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton2<SubCategory>(
+        child: DropdownButton2<Category>(
           focusNode: textFocusNode,
           isExpanded: true,
           hint: Text(
@@ -63,7 +62,7 @@ class _SubCategorySearchDropDownButtonState
                     value: category,
                     child: Text(
                       category.title!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                       ),
                     ),
@@ -75,7 +74,7 @@ class _SubCategorySearchDropDownButtonState
               selectedValue = value;
             });
             widget.selectedValue(value);
-            textFocusNode.requestFocus();
+            textFocusNode.requestFocus(); // Set focus to the TextFormField
           },
           buttonStyleData: const ButtonStyleData(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -99,6 +98,7 @@ class _SubCategorySearchDropDownButtonState
                 left: 8,
               ),
               child: TextFormField(
+                focusNode: textFocusNode, // Set the focus node
                 expands: true,
                 maxLines: null,
                 controller: textEditingController,

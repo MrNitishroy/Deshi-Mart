@@ -41,7 +41,7 @@ class ProductDetails extends StatelessWidget {
                 Divider(
                   color: Theme.of(context)
                       .colorScheme
-                      .onBackground
+                      .onSurface
                       .withOpacity(0.1),
                 ),
                 SizedBox(height: 20),

@@ -8,14 +8,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-
-class CategoryDataTable extends StatelessWidget {
-  const CategoryDataTable({super.key});
+class CouponDataTable extends StatelessWidget {
+  const CouponDataTable({super.key});
 
   @override
   Widget build(BuildContext context) {
     final categoryProvider = Provider.of<CategoryProvider>(context);
-    final categoryDataSource = CategoryDataSource(categoryProvider.categories);
+    final couponeDataSource = CouponDataSource(categoryProvider.categories);
     return Container(
       height: 600,
       decoration: BoxDecoration(
@@ -25,7 +24,7 @@ class CategoryDataTable extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: SfDataGrid(
           rowHeight: 100,
-          source: categoryDataSource,
+          source: couponeDataSource,
           allowFiltering: true,
           allowSorting: true,
           headerGridLinesVisibility: GridLinesVisibility.none,
@@ -75,10 +74,10 @@ class CategoryDataTable extends StatelessWidget {
   }
 }
 
-class CategoryDataSource extends DataGridSource {
+class CouponDataSource extends DataGridSource {
   late List<DataGridRow> dataGridRows;
 
-  CategoryDataSource(List<Category> products) {
+  CouponDataSource(List<Category> products) {
     dataGridRows = products
         .map((category) => DataGridRow(cells: [
               DataGridCell(columnName: "id", value: category.id),

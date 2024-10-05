@@ -1,12 +1,8 @@
-import 'package:deshi_mart/configs/CustomNotication.dart';
 import 'package:deshi_mart/pages/Product/Widgets/ProductAmount.dart';
 import 'package:deshi_mart/pages/Product/Widgets/ProductDetails.dart';
 import 'package:deshi_mart/pages/Product/Widgets/ProductMeta.dart';
-import 'package:deshi_mart/widgets/MyIconButton.dart';
 import 'package:deshi_mart/widgets/PrimaryButton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';

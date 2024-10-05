@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "812098578997",
+    "project_id": "desimart-6bf65",
+    "storage_bucket": "desimart-6bf65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812098578997:android:1590d3515b7dff37d89f7c",
+        "android_client_info": {
+          "package_name": "com.example.deshi_mart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZNAGbMnWSOPRZ0AGkjolYaEa18YwDc4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
